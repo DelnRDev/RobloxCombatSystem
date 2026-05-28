@@ -7,34 +7,44 @@ local CombatEvent = SharedFolder:WaitForChild("CombatEvent")
 
 local playersPrevHitTime = {}
 
-local CoolDownTime = 0.5
+local CoolDownTime = 1
 local damage = 10
-local combatRange = 10
+local combatRange = 2.5
 
+Players.PlayerAdded:Connect(function(player)
 
+    playersPrevHitTime[player] = os.clock()
+
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+
+    playersPrevHitTime[player] = nil
+
+end)
 
 local function getClosestTarget(attacker)
-    print("finding")
-    local attackerCharacter = attacker.Chracter
+    
+    local attackerCharacter = attacker.Character
     local attackerHumanoidRootPart = attackerCharacter and attackerCharacter:FindFirstChild("HumanoidRootPart")
-
+    print("getting closet player")
       for _, plr in pairs(Players:GetPlayers()) do
-
+            
             --check distance
             --if in range take then take damage
             if plr ~= attacker then
-
+                print("potential damager: "..plr.Name)
                 local character = plr.Character
                 local HumanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
                 local Humanoid = character and character:FindFirstChild("Humanoid")
 
                 if Humanoid and HumanoidRootPart and Humanoid.Health > 0 then
-
-                    local targetDistance = (attacterkerHumanoidRootPart.Position - HumanoidRootPart.Position).Magnitude
-
+                    print("can take damge: "..plr.Name)
+                    local targetDistance = (attackerHumanoidRootPart.Position - HumanoidRootPart.Position).Magnitude
+                    print(targetDistance)
                     if targetDistance <= combatRange then
-
-                       return plr
+                        print(plr.Name.." is the one")
+                       return Humanoid
 
                     end
 
@@ -66,6 +76,6 @@ CombatEvent.OnServerEvent:Connect(function(player)
 
     end
 
-    playerPrevHitTime[player] = currentTime 
+    playersPrevHitTime[player] = currentTime 
 
 end)

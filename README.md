@@ -62,3 +62,26 @@ Target takes damage
 - Weapon stats
 - Combo system
 - Raycast hit detection
+
+## Math Used
+
+Distance between players is computed using the magnitude of the displacement vector:
+
+$$
+\vec{d}=
+\vec{p}_{target}-
+\vec{p}_{attacker}
+$$
+
+$$
+\text{distance}=
+||\vec{d}||=
+\sqrt{x^2+y^2+z^2}
+$$
+
+Implemented in Luau as:
+
+```lua
+local distance =
+(root.Position - targetRoot.Position).Magnitude
+```

@@ -11,24 +11,10 @@ local CoolDownTime = 0.5
 local damage = 10
 local combatRange = 10
 
-local function takeDamage(player)
 
-    --character , HumanoidRootPart, Humanoid
-
-    local character = player.Character
-    local HumanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
-    local Humanoid = chracter and chracter:FindFirstChild("Humanoid")
-
-    if Humanoid and HumanoidRootPart and Humanoid.Health > 0 then
-
-        Humanoid:TakeDamage(damage)
-
-    end
-
-end
 
 local function getClosestTarget(attacker)
-
+    print("finding")
     local attackerCharacter = attacker.Chracter
     local attackerHumanoidRootPart = attackerCharacter and attackerCharacter:FindFirstChild("HumanoidRootPart")
 
@@ -40,7 +26,7 @@ local function getClosestTarget(attacker)
 
                 local character = plr.Character
                 local HumanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
-                local Humanoid = chracter and chracter:FindFirstChild("Humanoid")
+                local Humanoid = character and character:FindFirstChild("Humanoid")
 
                 if Humanoid and HumanoidRootPart and Humanoid.Health > 0 then
 

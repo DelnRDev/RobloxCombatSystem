@@ -13,6 +13,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
     end 
 
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
+
         CombatEvent:FireServer()
     end
 
